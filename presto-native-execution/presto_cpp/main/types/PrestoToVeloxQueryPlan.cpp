@@ -807,7 +807,6 @@ core::SortOrder toVeloxSortOrder(const protocol::SortOrder& sortOrder) {
   }
 }
 
-/*
 bool isFixedPartition(
     const std::shared_ptr<const protocol::ExchangeNode>& node,
     protocol::SystemPartitionFunction partitionFunction) {
@@ -840,7 +839,7 @@ bool isRoundRobinPartition(
     const std::shared_ptr<const protocol::ExchangeNode>& node) {
   return isFixedPartition(node, protocol::SystemPartitionFunction::ROUND_ROBIN);
 }
-*/
+
 
 std::vector<core::FieldAccessTypedExprPtr> toFieldExprs(
     const std::vector<std::shared_ptr<protocol::RowExpression>>& expressions,
@@ -935,7 +934,7 @@ struct PartitionedOutputChannels {
   // Each vector holding a single value for a constant channel.
   std::vector<VectorPtr> constValues;
 };
-
+*/
 core::LocalPartitionNode::Type toLocalExchangeType(
     protocol::ExchangeNodeType type) {
   switch (type) {
@@ -947,11 +946,10 @@ core::LocalPartitionNode::Type toLocalExchangeType(
       VELOX_UNSUPPORTED("Unsupported exchange type: {}", toJsonString(type));
   }
 }
-*/
+
 
 }  // namespace
 
-/*
 core::PlanNodePtr VeloxQueryPlanConverterBase::toVeloxQueryPlan(
     const std::shared_ptr<const protocol::ExchangeNode>& node,
     const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
@@ -1031,7 +1029,6 @@ core::PlanNodePtr VeloxQueryPlanConverterBase::toVeloxQueryPlan(
   VELOX_UNSUPPORTED(
       "Unsupported flavor of local exchange: {}", toJsonString(node));
 }
-*/
 
 namespace {
 bool equal(const std::shared_ptr<protocol::RowExpression>& actual,
@@ -1849,12 +1846,11 @@ core::PlanNodePtr VeloxQueryPlanConverterBase::toVeloxQueryPlan(
     const std::shared_ptr<const protocol::PlanNode>& node,
     const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
     const protocol::TaskId& taskId) {
-  /*
+  std::cout << node->_type << std::endl;
   if (auto exchange =
           std::dynamic_pointer_cast<const protocol::ExchangeNode>(node)) {
     return toVeloxQueryPlan(exchange, tableWriteInfo, taskId);
   }
-  */
   if (auto filter = std::dynamic_pointer_cast<const protocol::FilterNode>(node)) {
     return toVeloxQueryPlan(filter, tableWriteInfo, taskId);
   }
@@ -1890,10 +1886,12 @@ core::PlanNodePtr VeloxQueryPlanConverterBase::toVeloxQueryPlan(
           std::dynamic_pointer_cast<const protocol::MergeJoinNode>(node)) {
     return toVeloxQueryPlan(join, tableWriteInfo, taskId);
   }
+  */
   if (auto remoteSource =
           std::dynamic_pointer_cast<const protocol::RemoteSourceNode>(node)) {
     return toVeloxQueryPlan(remoteSource, tableWriteInfo, taskId);
   }
+  /*
   if (auto topN = std::dynamic_pointer_cast<const protocol::TopNNode>(node)) {
     return toVeloxQueryPlan(topN, tableWriteInfo, taskId);
   }
@@ -1974,13 +1972,11 @@ core::PlanFragment VeloxQueryPlanConverterBase::toVeloxQueryPlan(
   }
   */
 
-  /*
   if (auto output = std::dynamic_pointer_cast<const protocol::OutputNode>(
           fragment.root)) {
     planFragment.planNode = toVeloxQueryPlan(output, tableWriteInfo, taskId);
     return planFragment;
   }
-  */
 
   auto partitioningScheme = fragment.partitioningScheme;
   auto partitioningHandle = partitioningScheme.partitioning.handle.connectorHandle;
@@ -2110,7 +2106,6 @@ core::PlanFragment VeloxQueryPlanConverterBase::toVeloxQueryPlan(
   }
 }
 
-/*
 core::PlanNodePtr VeloxQueryPlanConverterBase::toVeloxQueryPlan(
     const std::shared_ptr<const protocol::OutputNode>& node,
     const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
@@ -2142,7 +2137,7 @@ velox::core::PlanNodePtr VeloxInteractiveQueryPlanConverter::toVeloxQueryPlan(
   }
   return std::make_shared<core::ExchangeNode>(node->id, rowType);
 }
-
+/*
 velox::core::PlanFragment VeloxBatchQueryPlanConverter::toVeloxQueryPlan(
     const protocol::PlanFragment& fragment,
     const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
