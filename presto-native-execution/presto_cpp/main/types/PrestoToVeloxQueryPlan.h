@@ -49,28 +49,22 @@ class VeloxQueryPlanConverterBase {
       const protocol::TaskId& taskId);
 
  protected:
-  /*
   virtual velox::core::PlanNodePtr toVeloxQueryPlan(
       const std::shared_ptr<const protocol::RemoteSourceNode>& node,
       const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
       const protocol::TaskId& taskId) = 0;
-  */
 
-  /*
   velox::core::PlanNodePtr toVeloxQueryPlan(
       const std::shared_ptr<const protocol::OutputNode>& node,
       const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
       const protocol::TaskId& taskId);
 
-  */
 
-  /*
   velox::core::PlanNodePtr toVeloxQueryPlan(
       const std::shared_ptr<const protocol::ExchangeNode>& node,
       const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
       const protocol::TaskId& taskId);
 
-  */
   velox::core::PlanNodePtr toVeloxQueryPlan(
       const std::shared_ptr<const protocol::FilterNode>& node,
       const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
@@ -194,12 +188,10 @@ class VeloxInteractiveQueryPlanConverter : public VeloxQueryPlanConverterBase {
   }
 
  protected:
-  /*
   velox::core::PlanNodePtr toVeloxQueryPlan(
       const std::shared_ptr<const protocol::RemoteSourceNode>& node,
       const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
       const protocol::TaskId& taskId) override;
-  */
 };
 
 class VeloxBatchQueryPlanConverter : public VeloxQueryPlanConverterBase {
@@ -220,12 +212,10 @@ class VeloxBatchQueryPlanConverter : public VeloxQueryPlanConverterBase {
       const protocol::TaskId& taskId) override;
 
  protected:
-  /*
   velox::core::PlanNodePtr toVeloxQueryPlan(
       const std::shared_ptr<const protocol::RemoteSourceNode>& node,
       const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
       const protocol::TaskId& taskId) override;
-  */
 
  private:
   const std::string shuffleName_;
