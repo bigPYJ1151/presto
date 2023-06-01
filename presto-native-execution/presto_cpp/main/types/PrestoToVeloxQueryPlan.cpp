@@ -1846,7 +1846,6 @@ core::PlanNodePtr VeloxQueryPlanConverterBase::toVeloxQueryPlan(
     const std::shared_ptr<const protocol::PlanNode>& node,
     const std::shared_ptr<protocol::TableWriteInfo>& tableWriteInfo,
     const protocol::TaskId& taskId) {
-  std::cout << node->_type << std::endl;
   if (auto exchange =
           std::dynamic_pointer_cast<const protocol::ExchangeNode>(node)) {
     return toVeloxQueryPlan(exchange, tableWriteInfo, taskId);
